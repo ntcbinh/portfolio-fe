@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * Design tokens taken from the source deck
+ * (docs/Portfolio – Nguyen Thi Cam Binh – Frontend Engineer (1).html),
+ * with the deck's orange brand hue replaced by green. Each green was picked
+ * to hit the same contrast ratio as the orange it replaces, so every
+ * text/background pair keeps its original legibility.
+ *
+ * A "tone" is a self-contained palette. A section sets one tone class and
+ * every child inside it picks the palette up through the semantic utilities
+ * below (bg-surface, text-fg, border-line, text-accent …), so cards and
+ * chips work on cream, night and green backgrounds without variants.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --color-page: var(--tone-page);
+  --color-surface: var(--tone-surface);
+  --color-line: var(--tone-line);
+  --color-accent: var(--tone-accent);
+  --color-chip: var(--tone-chip);
+  --color-fg: var(--tone-fg);
+  --color-fg-muted: var(--tone-fg-muted);
+  --color-fg-dim: var(--tone-fg-dim);
+
+  --color-green: #2e9e62;
+  --color-night: #14181f;
+  --color-cream: #f5f3ee;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.tone-light {
+  --tone-page: #f5f3ee;
+  --tone-surface: #fbfaf7;
+  --tone-line: #dcd6ca;
+  --tone-accent: #1b7342;
+  --tone-chip: #e9e4da;
+  --tone-fg: #14181f;
+  --tone-fg-muted: #4a4f58;
+  --tone-fg-dim: #61666f;
+}
+
+.tone-dark {
+  --tone-page: #14181f;
+  --tone-surface: #1d232b;
+  --tone-line: #2f3742;
+  --tone-accent: #43b87c;
+  --tone-chip: #262d37;
+  --tone-fg: #f5f3ee;
+  --tone-fg-muted: #b9c0ca;
+  --tone-fg-dim: #9aa2ad;
+}
+
+.tone-accent {
+  --tone-page: #2e9e62;
+  --tone-surface: #5cb57f;
+  --tone-line: #1f7a46;
+  --tone-accent: #14181f;
+  --tone-chip: #5cb57f;
+  --tone-fg: #14181f;
+  --tone-fg-muted: #14181f;
+  --tone-fg-dim: #102c1a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Clears the sticky header when jumping to an anchor. */
+    scroll-padding-top: 4.5rem;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background-color: var(--tone-page);
+    color: var(--tone-fg);
+    font-family: var(--font-sans), Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+  }
 }
